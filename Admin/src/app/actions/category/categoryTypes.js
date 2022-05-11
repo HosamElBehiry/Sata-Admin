@@ -1,0 +1,9 @@
+export const FETCH_REQUEST = "FETCH_REQUEST";
+export const GET_ALL_CATEGORY = "GET_ALL_CATEGORY";
+export const ADD_NEW_CATEGORY = "ADD_NEW_CATEGORY";
+export const FETCH_BY_ID = "FETCH_BY_ID";
+export const UPDATE_CATEGORY = "UPDATE_CATEGORY";
+export const DELETE_BY_ID = "DELETE_BY_ID";
+export const DELETE_MANY = "DELETE_MANY";
+export const GET_ALL_SUBCATEGORY = "GET_ALL_SUBCATEGORY";
+export const FETCH_ERROR = "FETCH_ERROR";

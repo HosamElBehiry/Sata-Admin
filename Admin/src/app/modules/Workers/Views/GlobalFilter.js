@@ -1,0 +1,60 @@
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useAsyncDebounce } from "react-table";
+import DispLang from "../../../../utils/HEADERS";
+import { hookDeleteMany } from "../../../actions/workers/workerActions";
+
+function GlobalFilter({ filter, setFilter, selectedFlatRows }) {
+  const [value, setValue] = useState(filter);
+  const dispatch = useDispatch();
+  const onChange = useAsyncDebounce(
+    (value) => setFilter(value || undefined),
+    500
+  );
+  const { user } = useSelector((state) => state.auth);
+  const ids = selectedFlatRows.map((d) => d.original.user._id);
+  return (
+    <div className="mb-7">
+      <div className="row align-items-center">
+        <div className="col-lg-9 col-xl-8">
+          <div className="row align-items-center">
+            <div className="col-md-4 my-2 my-md-0">
+              <div className="input-icon">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder={DispLang ? "ابحث هنا" : "Search"}
+                  id="kt_datatable_search_query"
+                  value={value || ""}
+                  onChange={(e) => {
+                    setValue(e.target.value);
+                    onChange(e.target.value);
+                  }}
+                />
+                <span>
+                  <i className="flaticon2-search-1 text-muted"></i>
+                </span>
+              </div>
+            </div>
+            {ids.length > 0 && (
+              <div className="col-md-4 my-2 my-md-0">
+                <div className="input-icon">
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    // انا هنا عامل كدا عشان ممكن البائع يمسح كذا عامل
+                    onClick={() => dispatch(hookDeleteMany(ids, user.roles[0]))}
+                  >
+                    {DispLang ? `مسح المحدد` : `Delete`}
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default GlobalFilter;
