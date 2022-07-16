@@ -100,3 +100,4 @@ CVV 	123	123
 rm -rf /var/www/sata/* && mkdir /var/www/sata/admin && cp -r build/* /var/www/sata/admin
 rm -rf /var/www/sata/* && mkdir /var/www/sata/client && cp -r build/* /var/www/sata/client
 */
+
